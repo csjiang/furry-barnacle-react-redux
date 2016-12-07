@@ -8,7 +8,8 @@ const Stations = props => {
 	  { name: 'Death Metal' },
 	  { name: 'Classical' }
 	];
-
+	console.log(props);
+	
 	return (
 		<div>
 	      <h3>Stations</h3>

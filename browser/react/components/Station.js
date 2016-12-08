@@ -10,9 +10,7 @@ const Station = props => {
 		<div id='station'>
 		<h3>{station} Station</h3>
 		<Songs 
-		songs={
-			props.songs && props.songs.filter(song => song.genre === station) 
-		}
+		songs={props.songs}
         currentSong={props.currentSong}
         isPlaying={props.isPlaying}
         toggleOne={props.toggleOne}/>

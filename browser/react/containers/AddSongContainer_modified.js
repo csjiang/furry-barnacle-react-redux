@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import AddSong from '../components/AddSong';
 import store from '../store';
 import {loadAllSongs, addSongToPlaylist} from '../action-creators/playlists';
@@ -14,6 +15,27 @@ class AddSongContainer extends React.Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
+
+  const mapStateToProps = (state, ownProps) =>
+  {
+    return {
+      songs:
+      error: 
+    }
+  }
+
+  const mapDispatchToProps = dispatch => {
+    return {
+      handleChange
+      handleSubmit
+    }
+  }
+
+  const connectToStore = connect (
+    mapStateToProps,
+    mapDispatchToProps
+  );
+
 
   componentDidMount() {
 

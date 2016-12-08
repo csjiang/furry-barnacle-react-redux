@@ -5,7 +5,6 @@ import AddSong from '../components/AddSong';
 import {addSongToPlaylist, receiveSongSubmit, receiveSongInput} from '../action-creators/playlists';
 
 const mapStateToProps = state => {
-  console.log(state);
   const myPlainObject = Object.assign({}, {
     songs: state.songs,
     error: state.playlists.error

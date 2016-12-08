@@ -1,60 +1,28 @@
-import React, {Component} from 'react';
-import store from '../store';
+import React from 'react';
+import { connect } from 'react-redux';
+
 import Lyrics from '../components/Lyrics';
+import { searchLyrics, receiveLyricsSubmit, receiveArtistInput, receiveSongInput } from '../action-creators/lyrics';
 
-import {searchLyrics} from '../action-creators/lyrics';
+const mapStateToProps = state => {
 
-export default class extends Component {
+  const myPlainObject = Object.assign({}, state.lyrics);
+  return myPlainObject;
+};
 
-  constructor() {
+const mapDispatchToProps = dispatch => {
+  return {
 
-    super();
+    handleSubmit: event => dispatch(receiveLyricsSubmit(event)),
 
-    this.state = Object.assign({
-      artistQuery: '',
-      songQuery: ''
-    }, store.getState());
+    setArtist: event => dispatch(receiveArtistInput(event)),
 
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleArtistInput = this.handleArtistInput.bind(this);
-    this.handleSongInput = this.handleSongInput.bind(this);
+    setSong: event => dispatch(receiveSongInput(event)),
 
-  }
+  };
+};
 
-  componentDidMount() {
-    this.unsubscribe = store.subscribe(() => {
-      this.setState(store.getState());
-    });
-  }
-
-  handleArtistInput(artist) {
-    this.setState({ artistQuery: artist });
-  }
-
-  handleSongInput(song) {
-    this.setState({ songQuery: song });
-  }
-
-  handleSubmit(e) {
-    e.preventDefault();
-    if (this.state.artistQuery && this.state.songQuery) {
-      store.dispatch(searchLyrics(this.state.artistQuery, this.state.songQuery));
-    }
-  }
-
-  componentWillUnmount() {
-    this.unsubscribe();
-  }
-
-  render() {
-    return (
-      <Lyrics
-        {...this.state}
-        handleChange={this.handleChange}
-        setArtist={this.handleArtistInput}
-        setSong={this.handleSongInput}
-        handleSubmit={this.handleSubmit} />
-    );
-  }
-
-}
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Lyrics);

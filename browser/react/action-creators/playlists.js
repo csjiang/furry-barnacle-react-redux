@@ -1,7 +1,9 @@
 import {
   RECEIVE_PLAYLISTS,
   RECEIVE_PLAYLIST,
-  RECEIVE_SONGS
+  RECEIVE_SONGS,
+  SONG_INPUT,
+  SUBMIT_ERROR
 } from '../constants';
 
 import axios from 'axios';
@@ -84,3 +86,30 @@ export const addSongToPlaylist = (playlistId, songId) => {
   };
 
 };
+
+export const receiveSongInput = event => ({
+  type: SONG_INPUT,
+  event
+});
+
+export const handleSubmitError = () => ({
+  type: SUBMIT_ERROR
+});
+
+export const receiveSongSubmit = event => {
+
+  event.preventDefault();
+
+  return (dispatch, getState) => {
+
+    const playlistId = getState().playlists.selected.id;
+    const songId = getState().playlists.songId;
+
+    dispatch(addSongToPlaylist(playlistId, songId))
+      .catch(() => dispatch(handleSubmitError()));
+  };
+};
+
+    
+
+

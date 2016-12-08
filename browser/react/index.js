@@ -22,6 +22,7 @@ import store from './store';
 import {receiveAlbums, getAlbumById} from './action-creators/albums';
 import {receiveArtists, getArtistById} from './action-creators/artists';
 import {receivePlaylists, getPlaylistById, loadAllSongs} from './action-creators/playlists';
+import {addAudioEventListeners} from './action-creators/player';
 
 const onAppEnter = function () {
 
@@ -35,8 +36,8 @@ const onAppEnter = function () {
       store.dispatch(receiveAlbums(albums));
       store.dispatch(receiveArtists(artists));
       store.dispatch(receivePlaylists(playlists));
+      store.dispatch(addAudioEventListeners());
     });
-
 };
 
 const onAlbumEnter = function (nextRouterState) {

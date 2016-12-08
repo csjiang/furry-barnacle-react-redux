@@ -74,9 +74,21 @@ export const startSong = (song, list) => {
   };
 };
 
+export const addAudioEventListeners = () => {
+  return dispatch => {
+    AUDIO.addEventListener('ended', () => dispatch(next()));
+    AUDIO.addEventListener('timeupdate', () => {
+      dispatch(setProgress(AUDIO.currentTime / AUDIO.duration));
+    });
+  }
+}
+
 export const toggleSong = (song, list) => {
   return (dispatch, getState) => {
     const currentState = getState().player;
+    song = song || currentState.currentSong;
+    list = list || currentState.currentSongList;
+
     if (currentState.currentSong.id === song.id) {
       dispatch(currentState.isPlaying ? pause() : play());
     } else {

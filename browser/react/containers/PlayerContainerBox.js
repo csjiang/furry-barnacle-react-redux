@@ -10,9 +10,9 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    toggle: () => dispatch(toggleSong()),
+    toggle: (song, list) => dispatch(toggleSong(song, list)),
     next: () => dispatch(next()),
-    prev: () => dispatch(previous()),
+    prev: () => dispatch(prev()),
   };
 };
 
